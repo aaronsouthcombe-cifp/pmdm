@@ -18,15 +18,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void loadCars() async {
     CarList carList = await CarService.getCarList();
+    List<String> carNames = carList
+    setState(() {
+
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Examen PMDM")),
-      body: SingleChildScrollView(child: Column(children: [Container()])),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(),
+            ListView.builder(
+              itemCount: carList.length,
+              itemBuilder: (context, index) {
+                String car = carList[index];
+                return ListTile(title: Text[car[0]]);
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
