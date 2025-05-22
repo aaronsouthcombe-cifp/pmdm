@@ -9,6 +9,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<String> cars = [];
+  bool loadingCars = true;
+  List<String> carNames = [];
 
   @override
   void initState() {
@@ -18,26 +20,35 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void loadCars() async {
     CarList carList = await CarService.getCarList();
-    List<String> carNames = carList
+    List<String> carNames = carList.message.keys.toList();
     setState(() {
-
+      cars = carNames;
+      loadingCars = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Examen PMDM")),
+      appBar: AppBar(title: Text("Cars (Examen PMDM)")),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(),
-            ListView.builder(
-              itemCount: carList.length,
-              itemBuilder: (context, index) {
-                String car = carList[index];
-                return ListTile(title: Text[car[0]]);
-              },
-            ),
+            loadingCars
+                ? Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: carNames.length,
+                    itemBuilder: (context, index) {
+                      String car = carNames[index];
+                      return ListTile(
+                        title: Text(
+                          car[0].toUpperCase() + car.substring(1).toLowerCase(),
+                        ),
+                      );
+                    },
+                  ),
           ],
         ),
       ),

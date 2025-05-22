@@ -8,6 +8,7 @@ class CarService {
   static Future<CarList> getCarList() async {
     var url = Uri.parse("$baseUrl/");
     var res = await http.get(url);
+    print(res.body);
     return CarList.fromJson(json.decode(res.body));
   }
 }
