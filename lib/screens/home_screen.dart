@@ -8,6 +8,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return;
+    return Scaffold(
+      appBar: AppBar(title: Text("Examen PMDM")),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
