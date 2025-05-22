@@ -6,18 +6,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<String> cars = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadCars();
+  }
+
+  void loadCars() async {
+    CarList carList = await CarService.getCarList();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Examen PMDM")),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-            ),
-          ],
-        ),
-      ),
+      body: SingleChildScrollView(child: Column(children: [Container()])),
     );
   }
 }
