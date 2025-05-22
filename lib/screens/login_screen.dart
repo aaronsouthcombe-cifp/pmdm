@@ -20,8 +20,10 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(height: 10),
-                    Text('Login',
-                        style: Theme.of(context).textTheme.headlineMedium),
+                    Text(
+                      'Login',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
                     SizedBox(height: 30),
                     ChangeNotifierProvider(
                       create: (_) => LoginFormProvider(),
@@ -37,9 +39,10 @@ class LoginScreen extends StatelessWidget {
                 child: Text(
                   'Crear un nou compte',
                   style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
                 ),
               ),
               SizedBox(height: 30),
@@ -97,7 +100,8 @@ class _LoginForm extends StatelessWidget {
             SizedBox(height: 30),
             MaterialButton(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+                borderRadius: BorderRadius.circular(10),
+              ),
               disabledColor: Colors.grey,
               elevation: 0,
               color: Colors.deepPurple,
@@ -118,8 +122,10 @@ class _LoginForm extends StatelessWidget {
                       loginForm.isLoading = true;
 
                       try {
-                        final authService =
-                            Provider.of<AuthService>(context, listen: false);
+                        final authService = Provider.of<AuthService>(
+                          context,
+                          listen: false,
+                        );
 
                         final String? errorMessage = await authService.signIn(
                           email: loginForm.email,
@@ -131,16 +137,18 @@ class _LoginForm extends StatelessWidget {
                         if (errorMessage == null) {
                           Navigator.pushReplacementNamed(context, 'home');
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(errorMessage)),
-                          );
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text(errorMessage)));
                         }
                       } catch (e) {
                         loginForm.isLoading = false;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                              content:
-                                  Text('Error logging in. Please try again.')),
+                            content: Text(
+                              'Error logging in. Please try again.',
+                            ),
+                          ),
                         );
                       }
                     },

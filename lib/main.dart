@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'screens/home_screen.dart';
 
 void main() {
-  runApp(AppState());
-}
-
-class AppState extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ProductsService()),
-        Provider<AuthService>(create: (_) => AuthService()),
-      ],
-      child: MyApp(),
-    );
-  }
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,11 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Productes App',
-      initialRoute: 'login',
-      routes: {
-        'login': (_) => LoginScreen(),
-        'home': (_) => HomeScreen(),
-      },
+      initialRoute: 'home',
+      routes: {'home': (_) => HomeScreen()},
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.grey[300],
       ),
